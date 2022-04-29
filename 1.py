@@ -16,15 +16,16 @@ while rval:  # 循环读取视频帧
     if (n % timeF == 0 and rval and n>4):  # 每隔timeF帧进行存储操作
         i += 1
         imgo+=frame.astype(np.float)[:,:,0]*0.114+frame.astype(np.float)[:,:,1]*0.587+frame.astype(np.float)[:,:,2]*0.299
-        imgp+=(frame.astype(np.float)[:,:,0]*0.114+frame.astype(np.float)[:,:,1]*0.587+frame.astype(np.float)[:,:,2]*0.299)**2
+        #imgp+=(frame.astype(np.float)[:,:,0]*0.114+frame.astype(np.float)[:,:,1]*0.587+frame.astype(np.float)[:,:,2]*0.299)**2
         print(i)
     rval, frame = vc.read()
     n = n + 1
     cv2.waitKey(1)
 vc.release()
 imgo=imgo/i
-imgp=(imgp/i-imgo**2)*i
+#imgp=(imgp/i-imgo**2)*i
 vc = cv2.VideoCapture(name+'.mp4')  # 读入视频文件，命名cv
+video=cv2.VideoWriter(name+'_1.mp4',cv2.VideoWriter_fourcc('I','4','2','0'),30,(imgo.shape[1],imgo.shape[0]))
 n = 1  # 计数
 if vc.isOpened():  # 判断是否正常打开
     rval, frame = vc.read()
@@ -38,15 +39,22 @@ while rval:  # 循环读取视频帧
         if i==1:
             img=(frame*0).astype(np.float)
         frame1=frame.astype(np.float)[:,:,0]*0.114+frame.astype(np.float)[:,:,1]*0.587+frame.astype(np.float)[:,:,2]*0.299
+        imgp+=(frame1-imgo)**2+2**-52
         img[:,:,0]+=frame[:,:,0].astype(np.float)*((frame1-imgo)**2+2**-52)
         img[:,:,1]+=frame[:,:,1].astype(np.float)*((frame1-imgo)**2+2**-52)
         img[:,:,2]+=frame[:,:,2].astype(np.float)*((frame1-imgo)**2+2**-52)
+        img1=frame*0
+        img1[:,:,0]=(img[:,:,0]/imgp+0.5)
+        img1[:,:,1]=(img[:,:,1]/imgp+0.5)
+        img1[:,:,2]=(img[:,:,2]/imgp+0.5)
+        video.write(img1.astype(np.uint8))
+        cv2.imshow('img1',cv2.resize(img1.astype(np.uint8),(1280,720)))
+        cv2.waitKey(1)
         print(i)
     rval, frame = vc.read()
     n = n + 1
     cv2.waitKey(1)
+cv2.destroyAllWindows()
 vc.release()
-img[:,:,0]=(img[:,:,0]/(imgp+2**-52*i)+0.5)
-img[:,:,1]=(img[:,:,1]/(imgp+2**-52*i)+0.5)
-img[:,:,2]=(img[:,:,2]/(imgp+2**-52*i)+0.5)
-cv2.imwrite(name+'_6.png',img)
+video.release()
+cv2.imwrite(name+'_6.png',img1.astype(np.uint8))
