@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import os
-name='starsky3'
+name='starsky4'#文件名
 vc = cv2.VideoCapture(name+'.mp4')  # 读入视频文件，命名cv
 n = 1  # 计数
 if vc.isOpened():  # 判断是否正常打开
@@ -11,7 +11,7 @@ else:
 timeF = 1  # 视频帧计数间隔频率
 i = 0
 while rval:  # 循环读取视频帧
-    if (n % timeF == 0 and rval and n>4):  # 每隔timeF帧进行存储操作
+    if (n % timeF == 0 and rval and n in range(1,557)):  #n:帧范围
         i += 1
         if i==1:
             imgo=frame.astype(np.int32)
