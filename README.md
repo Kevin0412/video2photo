@@ -13,7 +13,7 @@ analyze.py is a tool to know the brightness of your video,which can help you to 
 analyze.py是一个展示亮度的工具，可帮助你确定范围。
 pltshow.py shows a picture in matplotlib.pyplot.
 pltshow.py在matplotlib.pyplot中展示图片。
-5.py and 6.py are also two methods to do such things.5 is maxima of the difference between three together frames,using the middle frame.6 is weighted average that the square of the difference between three together frames serves as the weight of the middle frame.
+5.py and 6.py are also two methods to do such things.5 is maxima of the difference among three together frames,using the middle frame.6 is weighted average that the square of the difference among three together frames serves as the weight of the middle frame.
 5.py和6.py也是合成的两种算法。5是取连续三帧差的最大值，取这三帧中的中间帧。6是加权平均，三帧之间的差的平方作为中间帧的权重。
 6 is better than 1 in a bit cloudy situation.While 5 has a special style of image.1 has the best frame quality.2 is best for starry and sunny nights.You can use these four methods to make star trail video.videos recording moving things can also be processed into videos of movement track.Practice is the only criterion for testing truth.
 在有少量云的情况下6比1好。5有一种特别的画面风格。1有最好的画质。2对满天星的晴朗夜晚最好。你可以使用这四种算法来合成星轨视频。拍摄运动物体的视频也能被处理成运动轨迹的视频。实践是检验真理的唯一标准。
