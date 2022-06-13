@@ -10,7 +10,7 @@ else:
     rval = False
 timeF = 1
 i = 0
-video=cv2.VideoWriter(name+'_5.mp4',cv2.VideoWriter_fourcc('H','2','6','5'),30,(frame.shape[1],frame.shape[0]))
+video=cv2.VideoWriter(name+'_5.mp4',cv2.VideoWriter_fourcc('H','2','6','5'),vc.get(5),(frame.shape[1],frame.shape[0]))
 while rval:#两帧差最大值
     if (n % timeF == 0 and rval and n>3):#n:需要处理的帧的范围
         i += 1
