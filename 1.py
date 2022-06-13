@@ -23,7 +23,7 @@ while rval:#求平均
 vc.release()
 imgo=imgo/i
 vc = cv2.VideoCapture(name+'.mp4')
-video=cv2.VideoWriter(name+'_1.mp4',cv2.VideoWriter_fourcc('I','4','2','0'),30,(imgo.shape[1],imgo.shape[0]))
+video=cv2.VideoWriter(name+'_1.mp4',cv2.VideoWriter_fourcc('I','4','2','0'),vc.get(5),(imgo.shape[1],imgo.shape[0]))
 n = 1
 if vc.isOpened():
     rval, frame = vc.read()
